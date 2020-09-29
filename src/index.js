@@ -13,8 +13,22 @@ class Ben extends React.Component {
 		)
 	}
 }
+class Oscar extends React.Component {
+    
+    constructor(props){
+        super()
+    }
+
+    render(){
+        return (
+            <p>{this.props.name}´s {this.props.type}</p>
+        );
+    }
+}
+
 
 ReactDOM.render(
-  <Ben value="Ben"/>,
-  document.getElementById('root')
+    <Oscar name="Oscar" type="test" />,
+    <Ben value="Ben"/>,
+    document.getElementById('root')
 );
