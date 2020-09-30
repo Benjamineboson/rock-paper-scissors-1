@@ -18,11 +18,10 @@
 .player{
 	width: 30%;
 	height: 10%;
-	background-color: red;
+	background-color: lightgrey;
 }
 .computer{
 	width: 30%;
 	height: 10%;
-
-	background-color: blue;
+	background-color: lightgrey;
 }
