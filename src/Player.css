@@ -1,4 +1,13 @@
-.player-image {
+.player-container {
+    margin: 20px;
+}
+
+.weapon-container {
+    vertical-align:middle;
+    text-align:center;
+}
+
+.weapon-image {
     width: 250px;
     height: 250px;
 }

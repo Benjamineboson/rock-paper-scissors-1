@@ -41,7 +41,7 @@ class Game extends React.Component{
                             <Player playerName="Computer"/>
                         </div>
 					</div>
-                    <div>
+                    <div className="btn-container">
                         <button className="btnWeapon" onClick={() => this.selectWeapon("rock")}>Rock</button>
                         <button className="btnWeapon" onClick={() => this.selectWeapon("paper")}>Paper</button>
                         <button className="btnWeapon" onClick={() => this.selectWeapon("scissors")}>Scissors</button>

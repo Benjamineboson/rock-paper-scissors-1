@@ -14,12 +14,12 @@ class Player extends React.Component{
 
     render(){
         return(
-            <div>
-                <div>
+            <div className="player-container">
+                <div className="player-name">
                     <h2>{this.state.playerName}</h2>
                 </div>
-                <div>
-                    <img className="player-image" src={this.props.weapon === "rock" ? Rock : this.props.weapon === "scissors" ? Scissors : Paper} alt="paper"></img>
+                <div className="weapon-container">
+                    <img className="weapon-image" src={this.props.weapon === "rock" ? Rock : this.props.weapon === "scissors" ? Scissors : Paper} alt="paper"></img>
                 </div>
             </div>
         )
