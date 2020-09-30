@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Game extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 			numberOfRounds : 0,
-			playerName : ''
+			playerName:  ''
 		}
 		this.startGame = this.startGame.bind(this);
 	}
@@ -19,6 +19,14 @@ class Game extends React.Component{
 					<div>
 						<h1>Player: {this.state.playerName}</h1>
 						<h1>Number of rounds: {this.state.numberOfRounds}</h1>
+					</div>
+					<div className="gameContainer">
+					<div className="player">
+						<h2>Player</h2>
+					</div>
+					<div className="computer">
+						<h2>Computer</h2>
+					</div>
 					</div>
 				</div>
 			)
@@ -49,7 +57,6 @@ class Game extends React.Component{
 		})
 	}
 }
-
 
 ReactDOM.render(
 	<div>
