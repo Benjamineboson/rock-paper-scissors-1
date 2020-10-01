@@ -7,7 +7,7 @@ const Scoreboard = (props) => {
             <div>
                 <h3>Scoreboard:</h3>
                 <p>{props.player}</p>
-                <p>{props.cpu}</p>
+                <p>{props.winner}</p>
             </div>
         </div>
     );
