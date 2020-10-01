@@ -3,7 +3,7 @@ import './Player.css';
 import Scissors from './images/small-scissors.png';
 import Paper from './images/small-paper.png';
 import Rock from './images/small-rock.png';
-import QuestionMark from './images/questionMark.jpg';
+import QuestionMark from './images/questionMark.png';
 
 class Player extends React.Component{
     constructor(props){
