@@ -1,29 +1,29 @@
-.rubric{
+.rubric {
 	width: 25%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.setupForm{
+.setupForm {
 	margin-top: 10em;
 	width: 30%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.gameContainer{
+.gamesContainer {
 	display: flex;
 	margin: 20px 20px 0 20px;
 }
 
-.player{
+.player {
 	width: 350px;
     height: 350px;
     margin: 20px;
 	background-color: lightgrey;
 }
 
-.computer{
+.computer {
 	width: 350px;
     height: 350px;
     margin: 20px;

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Game.css';
 import Player from './Player';
+import Scoreboard from './Scoreboard';
 
 const weapons = ['rock', 'paper', 'scissors']
 
@@ -8,7 +9,8 @@ class Game extends React.Component{
 	constructor(props){
 		super();
 		this.state = {
-			numberOfRounds : 0,
+            numberOfRounds : 0,
+            // weapons: ['rock', 'paper', 'scissors'],
             playerName:  '',
             playerOne: weapons[0]
 		}
@@ -33,7 +35,7 @@ class Game extends React.Component{
 						<h1>Player: {this.state.playerName}</h1>
 						<h1>Number of rounds: {this.state.numberOfRounds}</h1>
 					</div>
-					<div className="gameContainer">
+					<div className="gamesContainer">
                         <div className="player">
                             <Player playerName={this.state.playerName} weapon={this.state.playerOne}/>
                         </div>
@@ -45,6 +47,9 @@ class Game extends React.Component{
                         <button className="btnWeapon" onClick={() => this.selectWeapon("rock")}>Rock</button>
                         <button className="btnWeapon" onClick={() => this.selectWeapon("paper")}>Paper</button>
                         <button className="btnWeapon" onClick={() => this.selectWeapon("scissors")}>Scissors</button>
+                    </div>
+                    <div>
+                        <Scoreboard player={this.state.playerName} cpu="Computer"/>
                     </div>
 				</div>
 			)
