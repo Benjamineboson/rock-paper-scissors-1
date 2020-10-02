@@ -12,12 +12,14 @@ class Game extends React.Component{
 			player : {
 				weapon: weapons[0],
 				name: '',
-				winCount : 0
+                winCount : 0,
+                hand: [],
 			},
 			computer :{
 				weapon: weapons[0],
-				name: '',
-				winCount : 0
+				name: 'Computer',
+                winCount : 0,
+                hand: [],
 			},
 			numberOfRounds : 1,
 			winner : '',
@@ -35,7 +37,8 @@ class Game extends React.Component{
 		let playerOne = this.state.player;
 		playerOne.weapon = weapons[weapon];
 		let computerOne = this.state.computer;
-		computerOne.weapon = weapons[Math.floor(Math.random()*3)+1] 
+        computerOne.weapon = weapons[Math.floor(Math.random()*3)+1] 
+
 		this.setState({
 			player : playerOne,
 			computer : computerOne, //Redo - more advanced.
@@ -44,8 +47,12 @@ class Game extends React.Component{
     }
 
 	render(){
-		let playerOne = this.state.player;
-		console.log(playerOne);
+
+        let playerOne = this.state.player;
+        let computer = this.state.computer;
+        console.log(playerOne);
+        
+
 		if (this.state.counter > this.state.numberOfRounds){
 			return(
 				<div>
@@ -56,19 +63,21 @@ class Game extends React.Component{
 					</div>
 				</div>
 			)
-		}else if (this.state.player.name.length > 1 && this.state.numberOfRounds > 0){
+        }
+        
+        else if (this.state.player.name.length > 1 && this.state.numberOfRounds > 0){
 			return(
 				<div>
 					<div>
 						<h1>Player: {this.state.player.name}</h1>
-						<h1>Number of rounds: {(this.state.numberOfRounds)}</h1>
+						<h1>Number of rounds played: {this.state.counter - 1} / {this.state.numberOfRounds}</h1>
 					</div>
 					<div className="gamesContainer">
                         <div className="player">
                             <Player playerName={this.state.player.name} weapon={this.state.player.weapon}/>
                         </div>
                         <div className="computer">
-                            <Player playerName="Computer" isNewRound={this.state.isNewRound} weapon={this.state.computer.weapon}/>
+                            <Player playerName={this.state.computer.name} isNewRound={this.state.isNewRound} weapon={this.state.computer.weapon}/>
                         </div>
 					</div>
                     <div className="btn-container">
@@ -80,11 +89,13 @@ class Game extends React.Component{
 						<button className="startRoundBtn" onClick={()=> this.startRound()}>Start Round</button>
 					</div>
                     <div>
-                        <Scoreboard player={this.state.player.name}  winner={this.state.winner} cpu="Computer"/>
+                        <Scoreboard player={playerOne} winner={this.state.winner} computer={computer}/>
                     </div>
 				</div>
 			)
-		}else{
+        }
+        
+        else{
 			return(
 				<div>
 					<div className="rubric">
@@ -92,8 +103,8 @@ class Game extends React.Component{
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="number" name="roundsInput" placeholder="Enter amount of rounds"/>
-							<input type="text" name="userNameInput" placeholder="Enter your username"/>
+							<input type="number" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="3"/>
+							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
 							<input type="submit" value="Start Game"/>
 						</form>
 					</div>
@@ -111,7 +122,14 @@ class Game extends React.Component{
 	}
 
 	startRound(){
+        let playerOne = this.state.player;
+        let tempComputer = this.state.computer;
+        playerOne.hand.push(playerOne.weapon);
+        tempComputer.hand.push(tempComputer.weapon);
+
 		this.setState({
+            player: playerOne,
+            computer: tempComputer,
 			winner : this.selectWinner(),
 			isNewRound : false,
 		})	
@@ -131,7 +149,7 @@ class Game extends React.Component{
 	}
 
 	selectWinner(){
-		let count = this.state.conter;
+        let count = this.state.counter;
 		const {player,computer} = this.state;
 		if (player.weapon === computer.weapon){
 			return 'Tie'
@@ -142,17 +160,19 @@ class Game extends React.Component{
 		){
 			player.winCount += 1;
 			this.setState({
-				numberOfRounds: this.state.numberOfRounds - 1,
-				counter : count+1,
+				// numberOfRounds: this.state.numberOfRounds - 1, this is not something we want to do! 
+				counter : count + 1,
 				player: player,
 			})
 			console.log(this.state.numberOfRounds);
 			return 'Player one wins'
 		}else{
+            computer.winCount += 1;
 			this.setState({
-				numberOfRounds: this.state.numberOfRounds - 1,
-				counter : count+1,
-				computerWinCount: this.state.computerWinCount + 1,
+				// numberOfRounds: this.state.numberOfRounds - 1,
+				counter : count + 1,
+                // computerWinCount: this.state.computerWinCount + 1,
+                computer: computer,
 
 			})
 			console.log(this.state.numberOfRounds);
