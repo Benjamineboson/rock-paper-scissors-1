@@ -3,21 +3,20 @@ import './Game.css';
 import Player from './Player';
 import Scoreboard from './Scoreboard';
 
-const weapons = ['?','rock', 'paper', 'scissors'];
-
 class Game extends React.Component{
 	constructor(props){
 		super();
 		this.state = {
+			weapons :  ['?','rock', 'paper', 'scissors'],
 			player : {
-				weapon: weapons[0],
+				weapon: '?',
 				name: '',
                 winCount : 0,
 				moves: [],
 				winningMoves: [],
 			},
 			computer :{
-				weapon: weapons[0],
+				weapon: '?',
 				name: 'Computer',
                 winCount : 0,
                 moves: [],
@@ -28,7 +27,10 @@ class Game extends React.Component{
 			isNewRound: true,
 		}
     }
-	
+	/**
+	 * Method to start a new game.
+	 * @param {*} event - stores input values(userName and numberOfRounds) from user.
+	 */
 	startGame = (event) =>{
 		event.preventDefault();
 		const {player} = this.state;
@@ -44,7 +46,7 @@ class Game extends React.Component{
      * @param {*} weapon - the selected choice from button click.
      */
 	selectWeapon = (weapon) => {
-		const {player,computer} = this.state;		
+		const {player,computer,weapons} = this.state;		
 		player.weapon = weapons[weapon];
         computer.weapon = this.computerWeaponSelect(); 
 		this.setState({
@@ -54,8 +56,11 @@ class Game extends React.Component{
 		});	
     }
 
+	/**
+	 * Method with intelligent weapon choice functionality.
+	 */
 	computerWeaponSelect = () =>{
-		const {counter} = this.state;
+		const {counter,weapons} = this.state;
 		if (counter === 1){
 			return weapons[Math.floor(Math.random()*3)+1];
 		}else{
@@ -64,8 +69,12 @@ class Game extends React.Component{
 		
 	}
 
+
+	/**
+	 * Method to start a new round and calls method selectWinner. Prevents new round if: weapon = '?' and isNewRound = true.
+	 */
 	startRound(){
-		const {player,computer,isNewRound} = this.state;
+		const {player,computer,isNewRound,weapons} = this.state;
 		if (player.weapon !== weapons[0] && isNewRound){
 			player.moves.push(player.weapon);
 			computer.moves.push(computer.weapon);
@@ -78,6 +87,9 @@ class Game extends React.Component{
 		}
 	}
 
+	/**
+	 * Method that returns the name of the winner or tie if it's a draw. And increments the winCount of the winner.
+	 */
 	selectWinner(){
 		const {player,computer,counter} = this.state;
 		if (player.weapon === computer.weapon){
@@ -105,6 +117,10 @@ class Game extends React.Component{
 		}
 	}
 
+
+	/**
+	 * Compares numbers of rounds won. Returns the winner of the whole game. 
+	 */
 	calculateTotal = () =>{
 		if (this.state.player.winCount > this.state.computer.winCount){
 			return "Player won!"
@@ -178,3 +194,4 @@ class Game extends React.Component{
 }
 
 export default Game;
+
