@@ -1,5 +1,40 @@
 .scoreboard-container {
-    width: 50%;
+    width: 25%;
     height: 25%;
     margin: 50px;
+    background-color: #f9f9f9;
+}
+
+.scoreboard {
+}
+
+.roundsWonCount {
+    display: flex;
+}
+.playerWon {
+    color: green;
+}
+
+.playerWonCount {
+    margin: 10px 10px 10px 0;
+}
+
+.computerWon {
+    color: red;
+}
+
+.computerWonCount {
+    margin: 10px;
+}
+
+.playersHand-container {
+    display: flex;
+}
+
+.playerHand {
+    margin: 10px 10px 10px 0;
+}
+
+.computerHand {
+    margin: 10px
 }
