@@ -14,6 +14,9 @@ class Game extends React.Component{
                 winCount : 0,
 				moves: [],
 				winningMoves: [],
+				rocks : [],
+				papers : [],
+				scissors : [],
 			},
 			computer :{
 				weapon: '?',
@@ -60,13 +63,33 @@ class Game extends React.Component{
 	 * Method with intelligent weapon choice functionality.
 	 */
 	computerWeaponSelect = () =>{
-		const {counter,weapons} = this.state;
-		if (counter === 1){
+		const {counter,weapons,player} = this.state;
+		if (counter <= 3 & (player.rocks.length === player.papers.length || player.papers.length === player.scissors.length)){
 			return weapons[Math.floor(Math.random()*3)+1];
 		}else{
-			return weapons[1];
+			let tempScissors = [];
+			let tempRocks = [];
+			let tempPapers = [];
+			player.moves.forEach((move)=>{
+				if (move === 'scissors'){
+					tempScissors.push(move);
+					player.scissors = tempScissors;
+				}else if (move === 'rock'){
+					tempRocks.push(move);
+					player.rocks = tempRocks;
+				}else{
+					tempPapers.push(move);
+					player.papers = tempPapers;
+				}
+			});
+			this.setState ({
+				player : player,
+			})
+			if (player.rocks.length > player.papers.length & player.rocks.length > player.scissors.length) return weapons[2];
+			if (player.papers.length > player.rocks.length & player.papers.length > player.scissors.length) return weapons[3];
+			return weapons[1]; 
+
 		}
-		
 	}
 
 
@@ -105,7 +128,6 @@ class Game extends React.Component{
 				counter : counter + 1,
 				player: player,
 			})
-			console.log(player.winningMoves);
 			return 'Player one wins'
 		}else{
             computer.winCount += 1;
@@ -177,12 +199,12 @@ class Game extends React.Component{
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" checked="checked" value="5"/>
-                            <label for="roundsInput5">5</label>
-                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" value="7"/>
-                            <label for="roundsInput7">7</label>
-                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" value="9"/>
-                            <label for="roundsInput9">9</label>
+							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" checked="checked" onChange={()=>{}} value="5"/>
+                            <label htmlFor="roundsInput5">5</label>
+                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" onChange={()=>{}} value="7"/>
+                            <label htmlFor="roundsInput7">7</label>
+                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" onChange={()=>{}} value="9"/>
+                            <label htmlFor="roundsInput9">9</label>
 							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
 							<input type="submit" value="Start Game"/>
 						</form>
