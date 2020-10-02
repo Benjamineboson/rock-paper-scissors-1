@@ -161,7 +161,12 @@ class Game extends React.Component{
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="number" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="5"/>
+							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="5" value="5"/>
+                            <label for="roundsInput5">5</label>
+                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" value="7"/>
+                            <label for="roundsInput7">7</label>
+                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" value="9"/>
+                            <label for="roundsInput9">9</label>
 							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
 							<input type="submit" value="Start Game"/>
 						</form>
