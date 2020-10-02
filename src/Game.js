@@ -66,14 +66,16 @@ class Game extends React.Component{
 
 	startRound(){
 		const {player,computer} = this.state;
-        player.moves.push(player.weapon);
-        computer.moves.push(computer.weapon);
-		this.setState({
-            player: player,
-            computer: computer,
-			winner : this.selectWinner(),
-			isNewRound : false,
-		})	
+		if (player.weapon !== weapons[0]){
+			player.moves.push(player.weapon);
+			computer.moves.push(computer.weapon);
+			this.setState({
+				player: player,
+				computer: computer,
+				winner : this.selectWinner(),
+				isNewRound : false,
+			})	
+		}
 	}
 
 	selectWinner(){
