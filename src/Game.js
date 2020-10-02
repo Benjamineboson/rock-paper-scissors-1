@@ -13,38 +13,103 @@ class Game extends React.Component{
 				weapon: weapons[0],
 				name: '',
                 winCount : 0,
-                hand: [],
+				moves: [],
+				winningMoves: [],
 			},
 			computer :{
 				weapon: weapons[0],
 				name: 'Computer',
                 winCount : 0,
-                hand: [],
+                moves: [],
 			},
 			numberOfRounds : 1,
 			winner : '',
 			counter: 1,
 			isNewRound: true,
 		}
-		this.startGame = this.startGame.bind(this);
     }
-    
-    /**
+	
+	startGame = (event) =>{
+		event.preventDefault();
+		const {player} = this.state;
+		player.name = event.target.userNameInput.value;
+		this.setState({
+			numberOfRounds: event.target.roundsInput.value,
+			player : player,
+		})
+	}
+
+ 	/**
      * Select rock, paper or scissors.
      * @param {*} weapon - the selected choice from button click.
      */
-    selectWeapon = (weapon) => {
+	selectWeapon = (weapon) => {
 		const {player,computer} = this.state;		
 		player.weapon = weapons[weapon];
-        computer.weapon = weapons[Math.floor(Math.random()*3)+1] 
+        computer.weapon = this.computerWeaponSelect(); 
 		this.setState({
 			player : player,
-			computer : computer, //Redo - more advanced.
+			computer : computer,
 			isNewRound: true,
 		});	
     }
 
+	computerWeaponSelect = () =>{
+		const {counter} = this.state;
+		if (counter === 1){
+			return weapons[Math.floor(Math.random()*3)+1];
+		}else{
+			return weapons[1];
+		}
+		
+	}
 
+	startRound(){
+		const {player,computer} = this.state;
+        player.moves.push(player.weapon);
+        computer.moves.push(computer.weapon);
+		this.setState({
+            player: player,
+            computer: computer,
+			winner : this.selectWinner(),
+			isNewRound : false,
+		})	
+	}
+
+	selectWinner(){
+		const {player,computer,counter} = this.state;
+		if (player.weapon === computer.weapon){
+			return 'Tie'
+		}else if (
+			(player.weapon === 'rock' && computer.weapon === 'scissors') ||
+			(player.weapon === 'scissors' && computer.weapon === 'paper') ||
+			(player.weapon === 'paper' && computer.weapon === 'rock')
+		){
+			player.winCount += 1;
+			player.winningMoves.push(player.weapon);
+			this.setState({
+				counter : counter + 1,
+				player: player,
+			})
+			console.log(player.winningMoves);
+			return 'Player one wins'
+		}else{
+            computer.winCount += 1;
+			this.setState({
+				counter : counter + 1,
+                computer: computer,
+			})
+			return 'Computer wins'
+		}
+	}
+
+	calculateTotal = () =>{
+		if (this.state.player.winCount > this.state.computer.winCount){
+			return "Player won!"
+		}else{
+			return "Computer won!"
+		}
+	}
 
 	render(){
 		const {player,computer,counter,numberOfRounds,isNewRound,winner} = this.state;
@@ -58,9 +123,7 @@ class Game extends React.Component{
 					</div>
 				</div>
 			)
-        }
-        
-        else if (player.name.length > 1 && numberOfRounds > 0){
+        }else if (player.name.length > 1 && numberOfRounds > 0){
 			return(
 				<div>
 					<div>
@@ -88,9 +151,7 @@ class Game extends React.Component{
                     </div>
 				</div>
 			)
-        }
-        
-        else{
+        }else{
 			return(
 				<div>
 					<div className="rubric">
@@ -98,7 +159,7 @@ class Game extends React.Component{
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="number" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="3"/>
+							<input type="number" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="5"/>
 							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
 							<input type="submit" value="Start Game"/>
 						</form>
@@ -107,69 +168,6 @@ class Game extends React.Component{
 			)
 		}
 	}
-
-	calculateTotal = () =>{
-		if (this.state.player.winCount > this.state.computer.winCount){
-			return "Player won!"
-		}else{
-			return "Computer won!"
-		}
-	}
-
-	startRound(){
-		const {player,computer} = this.state;
-        player.hand.push(player.weapon);
-        computer.hand.push(computer.weapon);
-		this.setState({
-            player: player,
-            computer: computer,
-			winner : this.selectWinner(),
-			isNewRound : false,
-		})	
-		console.log("Computer: "+this.state.computer.weapon);
-		console.log("Player : "+this.state.player.weapon);
-	}
-
-	startGame(event){
-		event.preventDefault();
-		const {player} = this.state;
-		player.name = event.target.userNameInput.value;
-		this.setState({
-			numberOfRounds: event.target.roundsInput.value,
-			player : player,
-		})
-		console.log(this.state.player.name.length);
-	}
-
-	selectWinner(){
-		const {player,computer,counter} = this.state;
-		if (player.weapon === computer.weapon){
-			return 'Tie'
-		}else if (
-			(player.weapon === 'rock' && computer.weapon === 'scissors') ||
-			(player.weapon === 'scissors' && computer.weapon === 'paper') ||
-			(player.weapon === 'paper' && computer.weapon === 'rock')
-		){
-			player.winCount += 1;
-			this.setState({
-				counter : counter + 1,
-				player: player,
-			})
-			console.log(this.state.numberOfRounds);
-			return 'Player one wins'
-		}else{
-            computer.winCount += 1;
-			this.setState({
-				counter : counter + 1,
-                computer: computer,
-			})
-			console.log(this.state.numberOfRounds);
-
-			return 'Computer wins'
-		}
-	}
 }
-
-
 
 export default Game;
