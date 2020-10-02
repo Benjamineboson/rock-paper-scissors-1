@@ -5,21 +5,19 @@ import Scoreboard from './Scoreboard';
 
 const weapons = ['?','rock', 'paper', 'scissors'];
 
-class Game extends React.Component{
-	constructor(props){
-		super();
+class Game extends React.Component <{},any>{
+	constructor(props: any){
+		super(props);
 		this.state = {
-			player : {
+			    player : {
 				weapon: weapons[0],
 				name: '',
-                winCount : 0,
-                hand: [],
+				winCount : 0
 			},
 			computer :{
 				weapon: weapons[0],
-				name: 'Computer',
-                winCount : 0,
-                hand: [],
+				name: '',
+				winCount : 0
 			},
 			numberOfRounds : 1,
 			winner : '',
@@ -33,22 +31,21 @@ class Game extends React.Component{
      * Select rock, paper or scissors.
      * @param {*} weapon - the selected choice from button click.
      */
-    selectWeapon = (weapon) => {
-		const {player,computer} = this.state;		
-		player.weapon = weapons[weapon];
-        computer.weapon = weapons[Math.floor(Math.random()*3)+1] 
+    selectWeapon = (weapon: number) => {
+		let playerOne = this.state.player;
+		playerOne.weapon = weapons[weapon];
+		let computerOne = this.state.computer;
+		computerOne.weapon = weapons[Math.floor(Math.random()*3)+1] 
 		this.setState({
-			player : player,
-			computer : computer, //Redo - more advanced.
+			player : playerOne,
+			computer : computerOne, //Redo - more advanced.
 			isNewRound: true,
 		});	
     }
 
-
-
 	render(){
-		const {player,computer,counter,numberOfRounds,isNewRound,winner} = this.state;
-		if (counter > numberOfRounds){
+		console.log(this.state.counter);
+		if (this.state.counter > this.state.numberOfRounds){
 			return(
 				<div>
 					<div>
@@ -58,21 +55,19 @@ class Game extends React.Component{
 					</div>
 				</div>
 			)
-        }
-        
-        else if (player.name.length > 1 && numberOfRounds > 0){
+		}else if (this.state.player.name.length > 1 && this.state.numberOfRounds > 0){
 			return(
 				<div>
 					<div>
-						<h1>Player: {player.name}</h1>
-						<h1>Number of rounds played: {counter - 1} / {numberOfRounds}</h1>
+						<h1>Player: {this.state.player.name}</h1>
+						<h1>Number of rounds: {(this.state.numberOfRounds-this.state.counter)+1}</h1>
 					</div>
 					<div className="gamesContainer">
                         <div className="player">
-                            <Player playerName={player.name} weapon={player.weapon}/>
+                            <Player playerName={this.state.player.name} weapon={this.state.player.weapon}/>
                         </div>
                         <div className="computer">
-                            <Player playerName={computer.name} isNewRound={isNewRound} weapon={computer.weapon}/>
+                            <Player playerName="Computer" isNewRound={this.state.isNewRound} weapon={this.state.computer.weapon}/>
                         </div>
 					</div>
                     <div className="btn-container">
@@ -84,13 +79,11 @@ class Game extends React.Component{
 						<button className="startRoundBtn" onClick={()=> this.startRound()}>Start Round</button>
 					</div>
                     <div>
-                        <Scoreboard player={player} winner={winner} computer={computer}/>
+                        <Scoreboard player={this.state.player.name}  winner={this.state.winner} cpu="Computer"/>
                     </div>
 				</div>
 			)
-        }
-        
-        else{
+		}else{
 			return(
 				<div>
 					<div className="rubric">
@@ -98,8 +91,8 @@ class Game extends React.Component{
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="number" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="3"/>
-							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
+							<input type="number" name="roundsInput" placeholder="Enter amount of rounds"/>
+							<input type="text" name="userNameInput" placeholder="Enter your username"/>
 							<input type="submit" value="Start Game"/>
 						</form>
 					</div>
@@ -117,32 +110,26 @@ class Game extends React.Component{
 	}
 
 	startRound(){
-		const {player,computer} = this.state;
-        player.hand.push(player.weapon);
-        computer.hand.push(computer.weapon);
 		this.setState({
-            player: player,
-            computer: computer,
 			winner : this.selectWinner(),
 			isNewRound : false,
 		})	
-		console.log("Computer: "+this.state.computer.weapon);
-		console.log("Player : "+this.state.player.weapon);
+		// console.log("Computer: "+this.state.computer.weapon);
+		// console.log("Player : "+this.state.player.weapon);
 	}
 
-	startGame(event){
+	startGame(event : any){
 		event.preventDefault();
-		const {player} = this.state;
-		player.name = event.target.userNameInput.value;
+		let playerOne = this.state.player;
+		playerOne.name = event.target.userNameInput.value;
 		this.setState({
 			numberOfRounds: event.target.roundsInput.value,
-			player : player,
+			player : playerOne
 		})
-		console.log(this.state.player.name.length);
 	}
 
 	selectWinner(){
-		const {player,computer,counter} = this.state;
+		const {player,computer} = this.state;
 		if (player.weapon === computer.weapon){
 			return 'Tie'
 		}else if (
@@ -152,19 +139,19 @@ class Game extends React.Component{
 		){
 			player.winCount += 1;
 			this.setState({
-				counter : counter + 1,
+				// numberOfRounds: this.state.numberOfRounds - 1,
+				counter : this.state.counter+1,
 				player: player,
 			})
-			console.log(this.state.numberOfRounds);
 			return 'Player one wins'
 		}else{
-            computer.winCount += 1;
+			computer.winCount += 1; 
 			this.setState({
-				counter : counter + 1,
-                computer: computer,
-			})
-			console.log(this.state.numberOfRounds);
+				// numberOfRounds: this.state.numberOfRounds - 1,
+				counter : this.state.counter+1,
+				computer : computer,
 
+			})
 			return 'Computer wins'
 		}
 	}
