@@ -13,7 +13,6 @@ class Game extends React.Component{
 				name: '',
                 winCount : 0,
 				moves: [],
-				winningMoves: [],
 				rocks : [],
 				papers : [],
 				scissors : [],
@@ -86,10 +85,6 @@ class Game extends React.Component{
 			this.setState ({
 				player : player,
 			})
-			console.log('Rocks '+player.rocks)
-			console.log('Scissors '+player.scissors)
-			console.log('Papers '+player.papers)
-			console.log('Moves '+player.moves)
 			if (player.scissors.length > player.rocks.length & player.scissors.length > player.papers.length) return weapons[1];
 			if (player.rocks.length > player.papers.length & player.rocks.length > player.scissors.length) return weapons[2];
 			if (player.papers.length > player.rocks.length & player.papers.length > player.scissors.length) return weapons[3];
@@ -127,7 +122,6 @@ class Game extends React.Component{
 			(player.weapon === 'paper' && computer.weapon === 'rock')
 		){
 			player.winCount += 1;
-			player.winningMoves.push(player.weapon);
 			computer.losingStreak += 1;
 			this.setState({
 				computer : computer,
