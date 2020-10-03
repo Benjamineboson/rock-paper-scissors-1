@@ -22,14 +22,16 @@ class Game extends React.Component{
 				weapon: '?',
 				name: 'Computer',
                 winCount : 0,
-                moves: [],
+				moves: [],
+				losingStreak : 0,
 			},
 			numberOfRounds : 1,
 			winner : '',
 			counter: 1,
 			isNewRound: true,
 		}
-    }
+	}
+	
 	/**
 	 * Method to start a new game.
 	 * @param {*} event - stores input values(userName and numberOfRounds) from user.
@@ -63,13 +65,12 @@ class Game extends React.Component{
 	 * Method with intelligent weapon choice functionality.
 	 */
 	computerWeaponSelect = () =>{
-		const {counter,weapons,player} = this.state;
-		if (counter <= 3 & (player.rocks.length === player.papers.length || player.papers.length === player.scissors.length)){
+		const {counter,weapons,player,computer} = this.state;
+		console.log("Comp Losing streak : "+computer.losingStreak)
+		if (computer.losingStreak > 0 || counter < 2){
 			return weapons[Math.floor(Math.random()*3)+1];
 		}else{
-			let tempScissors = [];
-			let tempRocks = [];
-			let tempPapers = [];
+			let tempRocks = [];	let tempScissors = []; let tempPapers = [];
 			player.moves.forEach((move)=>{
 				if (move === 'scissors'){
 					tempScissors.push(move);
@@ -85,13 +86,16 @@ class Game extends React.Component{
 			this.setState ({
 				player : player,
 			})
+			console.log('Rocks '+player.rocks)
+			console.log('Scissors '+player.scissors)
+			console.log('Papers '+player.papers)
+			console.log('Moves '+player.moves)
+			if (player.scissors.length > player.rocks.length & player.scissors.length > player.papers.length) return weapons[1];
 			if (player.rocks.length > player.papers.length & player.rocks.length > player.scissors.length) return weapons[2];
 			if (player.papers.length > player.rocks.length & player.papers.length > player.scissors.length) return weapons[3];
-			return weapons[1]; 
-
+			return weapons[Math.floor(Math.random()*3)+1];
 		}
 	}
-
 
 	/**
 	 * Method to start a new round and calls method selectWinner. Prevents new round if: weapon = '?' and isNewRound = true.
@@ -124,13 +128,16 @@ class Game extends React.Component{
 		){
 			player.winCount += 1;
 			player.winningMoves.push(player.weapon);
+			computer.losingStreak += 1;
 			this.setState({
+				computer : computer,
 				counter : counter + 1,
 				player: player,
 			})
 			return 'Player one wins'
 		}else{
-            computer.winCount += 1;
+			computer.winCount += 1;
+			computer.losingStreak = 0;
 			this.setState({
 				counter : counter + 1,
                 computer: computer,
