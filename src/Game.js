@@ -185,25 +185,20 @@ class Game extends React.Component{
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-                            <div className="roundsInput">
-
-                                <label>Enter number of rounds:</label>
-                                <div className="rounds">
-                                    <label>5</label>
-                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultChecked="checked" defaultValue="5"/>
-                                </div>
-                                <div className="rounds">  
-                                    <label>7</label>
-                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="7"/>
-                                </div> 
-                                <div className="rounds">
-                                    <label>9</label>
-                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="9"/>
-                                </div>
-                            </div>
                             <div className="userNameInput">
                                 <label>Player Name:</label><br></br>
                                 <input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
+                            </div>
+                            <div className="roundsInput">
+                                <label id="numberofRoundsLable">Enter number of rounds:</label>
+                                <div className="rounds">
+                                    <label>5</label>
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultChecked="checked" defaultValue="5"/>
+                                    <label>7</label>
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="7"/>
+                                    <label>9</label>
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="9"/>
+                                </div>
                             </div>
                             <input className="submitBtn" type="submit" value="Start Game"/>
 						</form>
