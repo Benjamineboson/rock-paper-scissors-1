@@ -173,16 +173,16 @@ class Game extends React.Component{
 			return(
 				<div>
 					<div className="rubric">
-						<h1>Rock Paper Scissors</h1>
+						<h1>{this.props.title}</h1>
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" checked="checked" value="5"/>
-                            <label for="roundsInput5">5</label>
-                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" value="7"/>
-                            <label for="roundsInput7">7</label>
-                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" value="9"/>
-                            <label for="roundsInput9">9</label>
+							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" defaultChecked="checked" defaultValue="5"/>
+                            <label>5</label>
+                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="7"/>
+                            <label>7</label>
+                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="9"/>
+                            <label>9</label>
 							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
 							<input type="submit" value="Start Game"/>
 						</form>

@@ -4,7 +4,7 @@ import Game from './Game'
 
 ReactDOM.render(
 	<div>
-		<Game/>
+		<Game title="Rock Paper Scissors"/>
 	</div>,
     document.getElementById('root')
 );
