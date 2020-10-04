@@ -20,7 +20,7 @@ const Scoreboard = (props) => {
                             <p className="playerWonCount">{props.player.name}: {props.player.winCount}</p>
                             <ol>
                                 {props.player.moves.map((weapon, index) => (
-                                    <li key={index}>{weapon}</li>
+                                    <li key={index}> {weapon}</li>
                                 ))}
                             </ol>
                         </div>
