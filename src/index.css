@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'BurbankBig';
+    src: local('BurbankBig'), url('./fonts/BurbankBigCondensed.otf'), format('opentype');
+}
+
+/* :root {
+    --main-bg-color: rgb(21,42,56);
+    --sec-bg-color: rgba(41,67,92, 0.3);
+    --txt-color:rgb(209,212,201);
+    --green-color: rgba(85,110,83, 0.2);
+}  */
+
+body {
+    /* background-color: var(--main-bg-color); */
+}
+
+.container {
+    margin: 50px;
+}

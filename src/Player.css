@@ -1,5 +1,12 @@
 .player-container {
-    margin: 20px;
+    width: 350px;
+    margin: 5px 10px;
+    background-color: lightgrey;
+}
+
+.player-name h2 {
+    margin: 0;
+    padding: 10px;
 }
 
 .weapon-container {
@@ -10,4 +17,5 @@
 .weapon-image {
     width: 250px;
     height: 250px;
+    padding: 0 0 20px 0;
 }

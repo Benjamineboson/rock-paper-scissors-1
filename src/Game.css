@@ -1,35 +1,82 @@
-.rubric {
-	width: 25%;
-	margin-left: auto;
-	margin-right: auto;
+/* Start Game */
+.startGame-container {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+    align-content: stretch;
+}
+
+.gameTitle {
+    margin: auto;
+}
+
+.gameTitle h1 {
+    font-family: 'Marvin', 'BurbankBig';
 }
 
 .setupForm {
-	margin-top: 10em;
-	width: 30%;
-	margin-left: auto;
-	margin-right: auto;
+    border: 0.5px solid black;
+    margin: auto;
+    padding: 50px;
 }
 
-.gamesContainer {
-	display: flex;
-	margin: 20px 20px 0 20px;
+.roundsInput {
+    margin: 10px;
 }
 
-.player {
-	width: 350px;
-    height: 350px;
-    margin: 20px;
-	background-color: lightgrey;
+.roundsInput label {
+    margin-bottom: 5px;
 }
 
-.computer {
-	width: 350px;
-    height: 350px;
-    margin: 20px;
-	background-color: lightgrey;
+.rounds {
+    padding: 5px;
 }
 
-.btn-container {
-    margin: 0 40px
+.userNameInput {
+    margin: 10px;
 }
+
+.submitBtn{
+    margin: 5px;
+    padding: 10px;
+}
+
+/* Game */
+.gameContainer {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+    align-content: stretch;
+}
+
+.numberOfRounds {
+    margin: auto;
+}
+
+.playersContainer {
+    display: flex;
+	margin: auto;
+}
+
+.btnContainer {
+    margin: 5px;
+}
+
+.btnWeapon {
+    margin: 5px;
+    padding: 10px;
+}
+
+.startRound {
+    margin: auto;
+}
+
+.startRoundBtn {
+    padding: 10px;
+}
+
+/* Game END */

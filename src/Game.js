@@ -133,8 +133,8 @@ class Game extends React.Component{
 		const {player,computer,counter,numberOfRounds,isNewRound,winner} = this.state;
 		if (counter > numberOfRounds){
 			return(
-				<div>
-					<div>
+				<div className="EndOfGame-container">
+					<div classname="Winner">
 						<h1>
 							{this.calculateTotal()}
 						</h1>
@@ -143,25 +143,33 @@ class Game extends React.Component{
 			)
         }else if (player.name.length > 1 && numberOfRounds > 0){
 			return(
-				<div>
-					<div>
-						<h1>Player: {player.name}</h1>
-						<h1>Number of rounds played: {counter - 1} / {numberOfRounds}</h1>
+				<div className="gameContainer">
+
+					<div className="numberOfRounds">
+                        <p>Number of rounds played: {counter - 1} / {numberOfRounds}</p>
 					</div>
-					<div className="gamesContainer">
+
+					<div className="playersContainer">
                         <div className="player">
                             <Player playerName={player.name} weapon={player.weapon}/>
+                            <div className="btnContainer">
+                                <button className="btnWeapon" onClick={() => this.selectWeapon(1)}>Rock</button>
+                                <button className="btnWeapon" onClick={() => this.selectWeapon(2)}>Paper</button>
+                                <button className="btnWeapon" onClick={() => this.selectWeapon(3)}>Scissors</button>
+                            </div>
                         </div>
                         <div className="computer">
                             <Player playerName={computer.name} isNewRound={isNewRound} weapon={computer.weapon}/>
                         </div>
 					</div>
-                    <div className="btn-container">
+                
+                    {/* <div className="btn-container">
                         <button className="btnWeapon" onClick={() => this.selectWeapon(1)}>Rock</button>
                         <button className="btnWeapon" onClick={() => this.selectWeapon(2)}>Paper</button>
                         <button className="btnWeapon" onClick={() => this.selectWeapon(3)}>Scissors</button>
-                    </div>
-					<div>
+                    </div> */}
+
+					<div className="startRound">
 						<button className="startRoundBtn" onClick={()=> this.startRound()}>Start Round</button>
 					</div>
                     <div>
@@ -171,20 +179,33 @@ class Game extends React.Component{
 			)
         }else{
 			return(
-				<div>
-					<div className="rubric">
+				<div className="startGame-container">
+					<div className="gameTitle">
 						<h1>{this.props.title}</h1>
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" defaultChecked="checked" defaultValue="5"/>
-                            <label>5</label>
-                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="7"/>
-                            <label>7</label>
-                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" defaultValue="9"/>
-                            <label>9</label>
-							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
-							<input type="submit" value="Start Game"/>
+                            <div className="roundsInput">
+
+                                <label>Enter number of rounds:</label>
+                                <div className="rounds">
+                                    <label>5</label>
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultChecked="checked" defaultValue="5"/>
+                                </div>
+                                <div className="rounds">  
+                                    <label>7</label>
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="7"/>
+                                </div> 
+                                <div className="rounds">
+                                    <label>9</label>
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="9"/>
+                                </div>
+                            </div>
+                            <div className="userNameInput">
+                                <label>Player Name:</label><br></br>
+                                <input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
+                            </div>
+                            <input className="submitBtn" type="submit" value="Start Game"/>
 						</form>
 					</div>
 				</div>
