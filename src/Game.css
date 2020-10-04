@@ -19,7 +19,6 @@
 }
 
 .setupForm {
-    /* width: 50%; */
     background-color: var(--sec-bg-color);
     border: 2px solid var(--border-color);
     border-radius: 3px;
@@ -130,7 +129,6 @@
 }
 
 /* --- Game END --- */
-
 .winner {
     margin: auto;
     text-align: center;

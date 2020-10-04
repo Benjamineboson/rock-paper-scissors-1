@@ -27,6 +27,7 @@ class Game extends React.Component{
 			isNewRound: true,
 		}
     }
+
 	/**
 	 * Method to start a new game.
 	 * @param {*} event - stores input values(userName and numberOfRounds) from user.
@@ -68,7 +69,6 @@ class Game extends React.Component{
 		}
 		
 	}
-
 
 	/**
 	 * Method to start a new round and calls method selectWinner. Prevents new round if: weapon = '?' and isNewRound = true.
@@ -116,7 +116,6 @@ class Game extends React.Component{
 			return 'Computer wins this round!'
 		}
 	}
-
 
 	/**
 	 * Compares numbers of rounds won. Returns the winner of the whole game. 
