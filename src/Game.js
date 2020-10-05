@@ -162,14 +162,15 @@ class Game extends React.Component{
 		player.rocks = [];
 		player.scissors = [];
 		player.papers = [];
-		player.weapon = '?'
+        player.weapon = '?'
 		computer.losingStreak = 0;
 		computer.winCount = 0;
-		computer.moves = [];
+        computer.moves = [];
 
 		this.setState({
 			player : player,
-			computer : computer,
+            computer : computer,
+            winner : '',
 			isNewRound : true,
 			roundCounter : (roundCounter-roundCounter)+1,
 		})
@@ -209,13 +210,13 @@ class Game extends React.Component{
                             <Player score={computer.winCount} playerName={computer.name} isNewRound={isNewRound} weapon={computer.weapon}/>
                         </div>
 					</div>
-					<div className="startRound">
+                    <div className="roundCounter">
                         <p>Round: {roundCounter - 1} / {numberOfRounds}</p>
+                    </div>
+					<div className="startRound">
 						<button className="startRoundBtn" onClick={()=> this.startRound()}>Start Round</button>
 					</div>
-                    <div>
-                        <Scoreboard player={player} winner={winner} computer={computer}/>
-                    </div>
+                    <Scoreboard player={player} winner={winner} computer={computer}/>
 				</div>
 			)
         }else{
