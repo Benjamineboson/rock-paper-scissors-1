@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'BurbankBigCondensed-Black';
+    src: local('BurbankBigCondensed-Black'), url('./fonts/BurbankBigCondensed.otf');
+}
+
+:root {
+    --main-bg-color: #393e46;
+    --sec-bg-color: rgba(41,67,92, 0.3);
+    --txt-color:rgb(209,212,201);
+    --border-color:rgba(209,212,201, 0.1);
+    --txt-blue-color: #3f72af;
+    --green-color: rgba(85,110,83, 0.2);
+} 
+
+body {
+    background-color: var(--main-bg-color);
+    font-family: 'BurbankBigCondensed-Black';
+    color: var(--txt-color);
+}
+
+.container {
+    margin: 5px 50px 50px 50px;
+}

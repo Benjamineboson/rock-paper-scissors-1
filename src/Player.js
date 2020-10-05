@@ -18,7 +18,7 @@ class Player extends React.Component{
             return(
                 <div className="player-container">
                     <div className="player-name">
-                        <h2>{this.state.playerName}</h2>
+                        <h2>{this.state.playerName}: {this.props.score}</h2>
                     </div>
                     <div className="weapon-container">
                         <img className="weapon-image" src={QuestionMark} alt="paper"></img>
@@ -29,7 +29,7 @@ class Player extends React.Component{
             return(
                 <div className="player-container">
                     <div className="player-name">
-                        <h2>{this.state.playerName}</h2>
+                        <h2>{this.state.playerName}: {this.props.score}</h2>
                     </div>
                     <div className="weapon-container">
                         <img className="weapon-image" src={this.props.weapon === "rock" ? Rock : this.props.weapon === "scissors" ? Scissors : this.props.weapon === 'paper' ? Paper : QuestionMark} alt="paper"></img>

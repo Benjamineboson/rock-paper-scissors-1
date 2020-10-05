@@ -1,35 +1,145 @@
-.rubric {
-	width: 25%;
-	margin-left: auto;
-	margin-right: auto;
+/* --- Start Game --- */
+.startGame-container {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+    align-content: stretch;
+}
+
+.gameTitle {
+    margin: auto;
+}
+
+.gameTitle h1 {
+    margin: 0 auto 20px auto;
+    font-size: 102px;
+    font-family: 'BurbankBigCondensed-Black';
 }
 
 .setupForm {
-	margin-top: 10em;
-	width: 30%;
-	margin-left: auto;
-	margin-right: auto;
+    background-color: var(--sec-bg-color);
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+    margin: auto;
+    padding: 60px 100px 60px 125px;
+    justify-items: center;
+    justify-content: center;
 }
 
-.gamesContainer {
-	display: flex;
-	margin: 20px 20px 0 20px;
+.userNameInput {
+    font-size: xx-large;
+    margin: 10px;
 }
 
-.player {
-	width: 350px;
-    height: 350px;
-    margin: 20px;
-	background-color: lightgrey;
+.userNameInput input {
+    width: 208px;
+    padding: 5px;
+    font-family: 'BurbankBigCondensed-Black';
+    font-size: large;
+    border: 1px solid black;
+    border-radius: 1px;
+    color: rgba(0,0,0, 0.6);
 }
 
-.computer {
-	width: 350px;
-    height: 350px;
-    margin: 20px;
-	background-color: lightgrey;
+.roundsInput {
+    margin: 10px;
 }
 
-.btn-container {
-    margin: 0 40px
+#numberofRoundsLable {
+    font-size: xx-large;
+    margin: 0;
+}
+
+.roundsInput label {
+    font-size: large;
+    margin-left: 5px;
+}
+
+.roundsInput input {
+    margin-right: 25px;
+}
+
+.submitBtn{
+    width: 75%;
+    margin: 15px 0 0 10px;
+    padding: 15px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+    background-color: var(--green-color);
+    -webkit-text-stroke: 0.5px black;
+    font-family: 'BurbankBigCondensed-Black';
+    font-size: xx-large;
+    color: var(--txt-color);
+}
+
+/* --- Game --- */
+.gameContainer {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+    align-content: stretch;
+    margin-top: 20px;
+}
+
+.playersContainer {
+    display: flex;
+	margin: auto;
+}
+
+.btnContainer {
+    margin: 5px;
+}
+
+.btnWeapon {
+    margin: 5px;
+    padding: 10px 25px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+    background-color: var(--green-color);
+    -webkit-text-stroke: 0.5px black;
+    font-family: 'BurbankBigCondensed-Black';
+    font-size: 1.4em;
+    color: var(--txt-color);
+}
+
+.startRound {
+    margin: auto;
+}
+
+.startRound p{
+    -webkit-text-stroke: 0.5px black;
+    font-size: 1.6em;
+    margin: 5px 69px;
+ }
+
+.startRoundBtn {
+    margin: 0 10px 0 10px;
+    padding: 15px 45px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+    background-color: var(--green-color);
+    -webkit-text-stroke: 0.5px black;
+    font-family: 'BurbankBigCondensed-Black';
+    font-size: xx-large;
+    color: var(--txt-color);
+}
+
+/* --- Game END --- */
+.winner {
+    margin: auto;
+    text-align: center;
+}
+
+.theWinner{
+    text-align: center;
+    -webkit-text-stroke: 0.5px black;
+    font-size: 5.6em;
+}
+
+.winnerScoreboard {
+    margin: auto;
 }

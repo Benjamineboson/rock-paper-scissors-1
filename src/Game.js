@@ -29,8 +29,8 @@ class Game extends React.Component{
 			counter: 1,
 			isNewRound: true,
 		}
-	}
-	
+    }
+
 	/**
 	 * Method to start a new game.
 	 * @param {*} event - stores input values(userName and numberOfRounds) from user.
@@ -114,7 +114,7 @@ class Game extends React.Component{
 	selectWinner(){
 		const {player,computer,counter} = this.state;
 		if (player.weapon === computer.weapon){
-			return 'Tie'
+			return 'Looks like a Tie - play again!'
 		}else if (
 			(player.weapon === 'rock' && computer.weapon === 'scissors') ||
 			(player.weapon === 'scissors' && computer.weapon === 'paper') ||
@@ -127,7 +127,8 @@ class Game extends React.Component{
 				counter : counter + 1,
 				player: player,
 			})
-			return 'Player one wins'
+			console.log(player.winningMoves);
+			return 'You won this round!'
 		}else{
 			computer.winCount += 1;
 			computer.losingStreak = 0;
@@ -135,10 +136,9 @@ class Game extends React.Component{
 				counter : counter + 1,
                 computer: computer,
 			})
-			return 'Computer wins'
+			return 'Computer won this round!'
 		}
 	}
-
 
 	/**
 	 * Compares numbers of rounds won. Returns the winner of the whole game. 
@@ -155,35 +155,35 @@ class Game extends React.Component{
 		const {player,computer,counter,numberOfRounds,isNewRound,winner} = this.state;
 		if (counter > numberOfRounds){
 			return(
-				<div>
-					<div>
-						<h1>
+				<div className="endOfGameContainer">
+					<div classname="winner">
+						<h1 className="theWinner">
 							{this.calculateTotal()}
 						</h1>
+                        <div className="winnerScoreboard">
+                            <Scoreboard player={player} computer={computer}/>
+                        </div>
 					</div>
 				</div>
 			)
         }else if (player.name.length > 1 && numberOfRounds > 0){
 			return(
-				<div>
-					<div>
-						<h1>Player: {player.name}</h1>
-						<h1>Number of rounds played: {counter - 1} / {numberOfRounds}</h1>
-					</div>
-					<div className="gamesContainer">
+				<div className="gameContainer">
+					<div className="playersContainer">
                         <div className="player">
-                            <Player playerName={player.name} weapon={player.weapon}/>
+                            <Player score={player.winCount} playerName={player.name} weapon={player.weapon}/>
+                            <div className="btnContainer">
+                                <button className="btnWeapon" onClick={() => this.selectWeapon(1)}>Rock</button>
+                                <button className="btnWeapon" onClick={() => this.selectWeapon(2)}>Paper</button>
+                                <button className="btnWeapon" onClick={() => this.selectWeapon(3)}>Scissors</button>
+                            </div>
                         </div>
                         <div className="computer">
-                            <Player playerName={computer.name} isNewRound={isNewRound} weapon={computer.weapon}/>
+                            <Player score={computer.winCount} playerName={computer.name} isNewRound={isNewRound} weapon={computer.weapon}/>
                         </div>
 					</div>
-                    <div className="btn-container">
-                        <button className="btnWeapon" onClick={() => this.selectWeapon(1)}>Rock</button>
-                        <button className="btnWeapon" onClick={() => this.selectWeapon(2)}>Paper</button>
-                        <button className="btnWeapon" onClick={() => this.selectWeapon(3)}>Scissors</button>
-                    </div>
-					<div>
+					<div className="startRound">
+                        <p>Round: {counter - 1} / {numberOfRounds}</p>
 						<button className="startRoundBtn" onClick={()=> this.startRound()}>Start Round</button>
 					</div>
                     <div>
@@ -193,20 +193,28 @@ class Game extends React.Component{
 			)
         }else{
 			return(
-				<div>
-					<div className="rubric">
-						<h1>Rock Paper Scissors</h1>
+				<div className="startGame-container">
+					<div className="gameTitle">
+						<h1>{this.props.title}</h1>
 					</div>
 					<div className="setupForm">
 						<form onSubmit={this.startGame}>
-							<input type="Radio" id="roundsInput5" name="roundsInput" placeholder="Enter amount of rounds" checked="checked" onChange={()=>{}} value="5"/>
-                            <label htmlFor="roundsInput5">5</label>
-                            <input type="Radio" id="roundsInput7" name="roundsInput" placeholder="Enter amount of rounds" onChange={()=>{}} value="7"/>
-                            <label htmlFor="roundsInput7">7</label>
-                            <input type="Radio" id="roundsInput9" name="roundsInput" placeholder="Enter amount of rounds" onChange={()=>{}} value="9"/>
-                            <label htmlFor="roundsInput9">9</label>
-							<input type="text" name="userNameInput" placeholder="Enter your username" defaultValue="Test Player"/>
-							<input type="submit" value="Start Game"/>
+                            <div className="userNameInput">
+                                <label>Player Name:</label><br></br>
+                                <input type="text" name="userNameInput" placeholder="Enter your username"/>
+                            </div>
+                            <div className="roundsInput">
+                                <label id="numberofRoundsLable">Enter number of rounds:</label>
+                                <div className="rounds">
+                                    <label>5
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultChecked="checked" defaultValue="5"/></label>
+                                    <label>7
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="7"/></label>
+                                    <label>9
+                                    <input type="Radio"  name="roundsInput" placeholder="Enter amount of rounds" defaultValue="9"/></label>
+                                </div>
+                            </div>
+                            <input className="submitBtn" type="submit" value="Start Game"/>
 						</form>
 					</div>
 				</div>
