@@ -65,7 +65,6 @@ class Game extends React.Component{
 	 */
 	computerWeaponSelect = () =>{
 		const {counter,weapons,player,computer} = this.state;
-		console.log("Comp Losing streak : "+computer.losingStreak)
 		if (computer.losingStreak > 0 || counter < 2){
 			return weapons[Math.floor(Math.random()*3)+1];
 		}else{
