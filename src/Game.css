@@ -143,3 +143,19 @@
 .winnerScoreboard {
     margin: auto;
 }
+
+.playAgainBtn {
+    margin: auto;
+}  
+
+.playAgainBtn button {
+    margin: 50px;
+    padding: 15px 45px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+    background-color: var(--green-color);
+    -webkit-text-stroke: 0.5px black;
+    font-family: 'BurbankBigCondensed-Black';
+    font-size: xx-large;
+    color: var(--txt-color);
+}

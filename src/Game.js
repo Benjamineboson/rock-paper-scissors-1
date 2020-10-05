@@ -180,14 +180,14 @@ class Game extends React.Component{
 		if (roundCounter > numberOfRounds){
 			return(
 				<div className="endOfGameContainer">
-					<div classname="winner">
+					<div className="winner">
 						<h1 className="theWinner">
 							{this.calculateTotal()}
 						</h1>
                         <div className="winnerScoreboard">
                             <Scoreboard replay={()=>this.replay} player={player} computer={computer}/>
                         </div>
-						<div>
+						<div className="playAgainBtn"> 
               				<button onClick={this.replay}>Replay Game</button>
             			</div>
 					</div>
