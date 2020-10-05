@@ -152,6 +152,9 @@ class Game extends React.Component{
 	}
 
 
+	/**
+	 * Clears the game board, and starts a new game. 
+	 */
 	replay = () => {
 		const {player,computer,counter} = this.state;
 		player.winCount = 0;
@@ -159,7 +162,7 @@ class Game extends React.Component{
 		player.rocks = [];
 		player.scissors = [];
 		player.papers = [];
-		
+		player.weapon = '?'
 		computer.losingStreak = 0;
 		computer.winCount = 0;
 		computer.moves = [];
