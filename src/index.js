@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Game from './Game'
 import './index.css';
-import './fonts/BurbankBigCondensed.otf';
+import './assets/fonts/BurbankBigCondensed.otf';
 
 ReactDOM.render(
 	<div className="container">

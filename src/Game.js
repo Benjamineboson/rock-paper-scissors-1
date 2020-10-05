@@ -26,7 +26,7 @@ class Game extends React.Component{
 			},
 			numberOfRounds : 1,
 			winner : '',
-			counter: 1,
+			roundCounter: 1,
 			isNewRound: true,
 		}
     }
@@ -64,8 +64,8 @@ class Game extends React.Component{
 	 * Method with intelligent weapon choice functionality.
 	 */
 	computerWeaponSelect = () =>{
-		const {counter,weapons,player,computer} = this.state;
-		if (computer.losingStreak > 0 || counter < 2){
+		const {roundCounter,weapons,player,computer} = this.state;
+		if (computer.losingStreak > 0 || roundCounter < 2){
 			return weapons[Math.floor(Math.random()*3)+1];
 		}else{
 			let tempRocks = [];	let tempScissors = []; let tempPapers = [];
@@ -112,7 +112,7 @@ class Game extends React.Component{
 	 * Method that returns the name of the winner or tie if it's a draw. And increments the winCount of the winner.
 	 */
 	selectWinner(){
-		const {player,computer,counter} = this.state;
+		const {player,computer,roundCounter} = this.state;
 		if (player.weapon === computer.weapon){
 			return 'Looks like a Tie - play again!'
 		}else if (
@@ -124,7 +124,7 @@ class Game extends React.Component{
 			computer.losingStreak += 1;
 			this.setState({
 				computer : computer,
-				counter : counter + 1,
+				roundCounter : roundCounter + 1,
 				player: player,
 			})
 			console.log(player.winningMoves);
@@ -133,7 +133,7 @@ class Game extends React.Component{
 			computer.winCount += 1;
 			computer.losingStreak = 0;
 			this.setState({
-				counter : counter + 1,
+				roundCounter : roundCounter + 1,
                 computer: computer,
 			})
 			return 'Computer won this round!'
@@ -156,7 +156,7 @@ class Game extends React.Component{
 	 * Clears the game board, and starts a new game. 
 	 */
 	replay = () => {
-		const {player,computer,counter} = this.state;
+		const {player,computer,roundCounter} = this.state;
 		player.winCount = 0;
 		player.moves = [];
 		player.rocks = [];
@@ -171,13 +171,13 @@ class Game extends React.Component{
 			player : player,
 			computer : computer,
 			isNewRound : true,
-			counter : (counter-counter)+1,
+			roundCounter : (roundCounter-roundCounter)+1,
 		})
 	}
 
 	render(){
-		const {player,computer,counter,numberOfRounds,isNewRound,winner} = this.state;
-		if (counter > numberOfRounds){
+		const {player,computer,roundCounter,numberOfRounds,isNewRound,winner} = this.state;
+		if (roundCounter > numberOfRounds){
 			return(
 				<div className="endOfGameContainer">
 					<div classname="winner">
@@ -210,7 +210,7 @@ class Game extends React.Component{
                         </div>
 					</div>
 					<div className="startRound">
-                        <p>Round: {counter - 1} / {numberOfRounds}</p>
+                        <p>Round: {roundCounter - 1} / {numberOfRounds}</p>
 						<button className="startRoundBtn" onClick={()=> this.startRound()}>Start Round</button>
 					</div>
                     <div>

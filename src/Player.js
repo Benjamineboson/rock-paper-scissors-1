@@ -1,9 +1,9 @@
 import React from 'react';
 import './Player.css';
-import Scissors from './images/small-scissors.png';
-import Paper from './images/small-paper.png';
-import Rock from './images/small-rock.png';
-import QuestionMark from './images/questionMark.png';
+import Scissors from './assets/images/small-scissors.png';
+import Paper from './assets/images/small-paper.png';
+import Rock from './assets/images/small-rock.png';
+import QuestionMark from './assets/images/questionMark.png';
 
 class Player extends React.Component{
     constructor(props){
