@@ -40,8 +40,8 @@ class Game extends React.Component{
 		const {player} = this.state;
 		player.name = event.target.userNameInput.value;
 		this.setState({
-			numberOfRounds: event.target.roundsInput.value,
-			player : player,
+		numberOfRounds: event.target.roundsInput.value,
+		player : player,
 		})
 	}
 
@@ -151,6 +151,27 @@ class Game extends React.Component{
 		}
 	}
 
+
+	replay = () => {
+		const {player,computer,counter} = this.state;
+		player.winCount = 0;
+		player.moves = [];
+		player.rocks = [];
+		player.scissors = [];
+		player.papers = [];
+		
+		computer.losingStreak = 0;
+		computer.winCount = 0;
+		computer.moves = [];
+
+		this.setState({
+			player : player,
+			computer : computer,
+			isNewRound : true,
+			counter : (counter-counter)+1,
+		})
+	}
+
 	render(){
 		const {player,computer,counter,numberOfRounds,isNewRound,winner} = this.state;
 		if (counter > numberOfRounds){
@@ -161,8 +182,11 @@ class Game extends React.Component{
 							{this.calculateTotal()}
 						</h1>
                         <div className="winnerScoreboard">
-                            <Scoreboard player={player} computer={computer}/>
+                            <Scoreboard replay={()=>this.replay} player={player} computer={computer}/>
                         </div>
+						<div>
+              				<button onClick={this.replay}>Replay Game</button>
+            			</div>
 					</div>
 				</div>
 			)
@@ -222,6 +246,8 @@ class Game extends React.Component{
 		}
 	}
 }
+
+
 
 export default Game;
 
