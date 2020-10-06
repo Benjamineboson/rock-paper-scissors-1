@@ -9,7 +9,9 @@ const Scoreboard = (props) => {
             </div>
             <div className="scoreboard-container">
                 <div className="playerHand">
-                    <p className="playerWonCount">{props.player.name}: {props.player.winCount}</p>
+                    <div className="playerWonCount">
+                        <p>{props.player.name}: {props.player.winCount}</p>
+                    </div>
                     <ol>
                         {props.player.moves.map((weapon, index) => (
                             <li key={index}> {weapon}</li>
@@ -17,7 +19,9 @@ const Scoreboard = (props) => {
                     </ol>
                 </div>
                 <div className="computerHand">
-                    <p className="computerWonCount">{props.computer.name}: {props.computer.winCount}</p>
+                    <div className="computerWonCount">
+                        <p>{props.computer.name}: {props.computer.winCount}</p>
+                    </div>
                     <ol>
                         {props.computer.moves.map((weapon, index) => (
                             <li key={index}>{weapon}</li>
