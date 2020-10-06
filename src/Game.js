@@ -27,7 +27,7 @@ class Game extends React.Component{
 			numberOfRounds : 1,
 			winner : '',
 			roundCounter: 1,
-			isNewRound: true,
+			isStartOfNewRound: true,
 		}
     }
 
@@ -56,7 +56,7 @@ class Game extends React.Component{
 		this.setState({
 			player : player,
 			computer : computer,
-			isNewRound: true,
+			isStartOfNewRound: true,
 		});	
     }
 
@@ -92,18 +92,18 @@ class Game extends React.Component{
 	}
 
 	/**
-	 * Method to start a new round and calls method selectWinner. Prevents new round if: weapon = '?' and isNewRound = true.
+	 * Method to start a new round and calls method selectWinner. Prevents new round if: weapon = '?' and isStartOfNewRound = true.
 	 */
 	startRound(){
-		const {player,computer,isNewRound,weapons} = this.state;
-		if (player.weapon !== weapons[0] && isNewRound){
+		const {player,computer,isStartOfNewRound,weapons} = this.state;
+		if (player.weapon !== weapons[0] && isStartOfNewRound){
 			player.moves.push(player.weapon);
 			computer.moves.push(computer.weapon);
 			this.setState({
 				player: player,
 				computer: computer,
 				winner : this.selectWinner(),
-				isNewRound : false,
+				isStartOfNewRound : false,
 			})	
 		}
 	}
@@ -127,7 +127,6 @@ class Game extends React.Component{
 				roundCounter : roundCounter + 1,
 				player: player,
 			})
-			console.log(player.winningMoves);
 			return 'You won this round!'
 		}else{
 			computer.winCount += 1;
@@ -151,7 +150,6 @@ class Game extends React.Component{
 		}
 	}
 
-
 	/**
 	 * Clears the game board, and starts a new game. 
 	 */
@@ -171,13 +169,13 @@ class Game extends React.Component{
 			player : player,
             computer : computer,
             winner : '',
-			isNewRound : true,
+			isStartOfNewRound : true,
 			roundCounter : (roundCounter-roundCounter)+1,
 		})
 	}
 
 	render(){
-		const {player,computer,roundCounter,numberOfRounds,isNewRound,winner} = this.state;
+		const {player,computer,roundCounter,numberOfRounds,isStartOfNewRound,winner} = this.state;
 		if (roundCounter > numberOfRounds){
 			return(
 				<div className="endOfGameContainer">
@@ -207,7 +205,7 @@ class Game extends React.Component{
                             </div>
                         </div>
                         <div className="computer">
-                            <Player score={computer.winCount} playerName={computer.name} isNewRound={isNewRound} weapon={computer.weapon}/>
+                            <Player score={computer.winCount} playerName={computer.name} isStartOfNewRound={isStartOfNewRound} weapon={computer.weapon}/>
                         </div>
 					</div>
                     <div className="roundCounter">
@@ -251,7 +249,4 @@ class Game extends React.Component{
 	}
 }
 
-
-
 export default Game;
-

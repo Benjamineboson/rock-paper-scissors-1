@@ -14,7 +14,7 @@ class Player extends React.Component{
     }
 
     render(){
-        if (this.props.isNewRound){
+        if (this.props.isStartOfNewRound){
             return(
                 <div className="player-container">
                     <div className="player-name">
