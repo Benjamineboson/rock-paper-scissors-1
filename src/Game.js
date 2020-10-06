@@ -192,7 +192,7 @@ class Game extends React.Component{
 					</div>
 				</div>
 			)
-        }else if (player.name.length > 1 && numberOfRounds > 0){
+        }else if (player.name.length > 1 && player.name.length < 21 && numberOfRounds > 0){
 			return(
 				<div className="gameContainer">
 					<div className="playersContainer">
